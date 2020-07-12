@@ -6,4 +6,4 @@ RUN mvn -f /home/app/pom.xml clean package -DskipTests=true
 
 FROM openjdk:11-jre-slim
 COPY --from=build /home/app/target/api-*.jar /home/app/app.jar
-ENTRYPOINT ["java","-Dspring.profiles.active=dev", "-jar", "/home/app/app.jar"]
+ENTRYPOINT ["java","-Dspring.profiles.active=prod", "-jar", "/home/app/app.jar"]
