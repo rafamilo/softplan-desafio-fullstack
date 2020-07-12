@@ -1,0 +1,35 @@
+version: 2
+
+api: &api
+  docker:
+    - image: circleci/openjdk:8u242
+  working_directory: ~/app
+  command: ln -s ~/softplan-desafio-fullstack/api ~/app
+
+app: &app
+  docker:
+    - image: circleci/openjdk:8u242
+  working_directory: ~/app
+  command: ln -s ~/softplan-desafio-fullstack/app ~/app
+
+jobs:
+  tests-n-build-api:
+    <<: *api
+    steps:
+      - checkout
+      - run: mvn package -Dspring-boot.run.arguments=--spring.profiles.active=dev -DskipTests=true
+      - run: mvn test
+  tests-n-build-app:
+    <<: *app
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm run test:unit
+      - run: npm run build
+
+workflows:
+  version: 2
+  main:
+    jobs:
+      - tests-n-build-api
+      - tests-n-build-app
