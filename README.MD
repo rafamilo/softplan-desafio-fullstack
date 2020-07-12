@@ -9,7 +9,7 @@
   - pronto!
 - Usando apenas o Maven + MYSQL + yarn ou npm
   - Rode o banco com docker ```docker run -p 7894:3306 --name processes-db -e MYSQL_DATABASE=processes -e MYSQL_ROOT_PASSWORD=root -d mysql:latest mysqld --default-authentication-plugin=mysql_native_password```
-  - Abra a pasta da api e rode o comando ```mvn spring-boot:run -Dspring-boot.run.arguments=--spring.profiles.active=dev``` 
+  - Abra a pasta da api e rode o comando ```mvn liquibase:migrate && mvn spring-boot:run -Dspring-boot.run.arguments=--spring.profiles.active=dev```
   - Abra as pastas dos front-ends e rode o comando yarn start ou npm run start
 
 - Procedimento para testar front-end
