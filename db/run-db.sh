@@ -1,3 +1,2 @@
 #!/bin/sh
-docker build -t softplan/processes-db . &&
-docker run -p 7984:3306 --name processes-db -d softplan/processes-db --default-authentication-plugin=mysql_native_password
+docker run -p 7894:3306 --name processes-db -e MYSQL_DATABASE=processes -e MYSQL_ROOT_PASSWORD=root -d mysql:latest mysqld --default-authentication-plugin=mysql_native_password
